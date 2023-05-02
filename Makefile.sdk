@@ -100,7 +100,9 @@ run: manifests generate fmt vet ## Run a controller from your host.
 
 docker-build: test ## Build docker image with the manager.
     for arch in ${LINUX_ARCH}; do\
-	    docker buildx build --platform=linux/$${arch} --load --progress=plain -t ${IMG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) . ; \
+	    docker buildx build --platform=linux/$${arch} \
+			--build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) \
+			-t ${IMG} . --load ; \
 	done
 
 	##docker build -t ${IMG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) .
