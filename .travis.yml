@@ -30,7 +30,7 @@ after_failure:
 
 before_script:
 - export REGISTRY_URL=$(echo "${DOCKER_REGISTRY_LIST}" | tr ',' ' ' | cut -d' ' -f1)
-- export REGISTRY_REPO=${REGISTRY_URL}/${DOCKER_IMAGE_NAME}
+#- export REGISTRY_REPO=${REGISTRY_URL}/${DOCKER_IMAGE_NAME}
 
 script:
 - make deps
