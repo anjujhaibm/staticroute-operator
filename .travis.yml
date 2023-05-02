@@ -35,6 +35,7 @@ before_script:
 script:
 - make deps
 - make fvt || travis_terminate 1
+- docker images
 
 # deploy:
 # - provider: script
