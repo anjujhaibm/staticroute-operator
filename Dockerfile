@@ -1,6 +1,6 @@
 # Builder stage
 ARG BUILDER_IMAGE
-FROM $BUILDER_IMAGE as builder
+FROM --platform=$TARGETPLATFORM $BUILDER_IMAGE as builder
 ENV GO111MODULE=on
 WORKDIR /
 COPY go.mod go.mod
@@ -12,7 +12,7 @@ COPY api/ api/
 COPY controllers/ controllers/
 COPY pkg/ pkg/
 COPY version/ version/
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=mod -a -o /staticroute-operator main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$LINUX_ARCH go build -mod=mod -a -o /staticroute-operator main.go
 
 # Intermediate stage to apply capabilities
 FROM debian:bullseye AS intermediate
