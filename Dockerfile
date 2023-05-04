@@ -12,7 +12,7 @@ COPY api/ api/
 COPY controllers/ controllers/
 COPY pkg/ pkg/
 COPY version/ version/
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=$LINUX_ARCH go build -mod=mod -a -o /staticroute-operator main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$arch go build -mod=mod -a -o /staticroute-operator main.go
 
 # Intermediate stage to apply capabilities
 FROM debian:bullseye AS intermediate
