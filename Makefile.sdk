@@ -4,7 +4,7 @@
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
 VERSION ?= 0.0.1
-LINUX_ARCH = amd64 s390x
+# LINUX_ARCH = amd64 s390x
 
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "candidate,fast,stable")
@@ -99,8 +99,8 @@ run: manifests generate fmt vet ## Run a controller from your host.
 	go run ./main.go
 
 docker-build: test ## Build docker image with the manager.
-	docker build -t ${FULL_IMAGE}-$(ARCH):${TAG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=amd64 .
-	docker build -t ${FULL_IMAGE}-$(ARCH):${TAG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=s390x .
+	docker build -t ${IMG}-$(ARCH):${TAG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=amd64 .
+	docker build -t ${IMG}-$(ARCH):${TAG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=s390x .
 
 ##docker build -t ${IMG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) .
 
