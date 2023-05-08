@@ -99,7 +99,7 @@ run: manifests generate fmt vet ## Run a controller from your host.
 	go run ./main.go
 
 docker-build: test ## Build docker image with the manager.
-	docker build -t ${IMG}-$(ARCH) --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=amd64 .
+	docker build --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=amd64 -t ${IMG}-$(ARCH) .
 	docker build -t ${IMG}-$(ARCH) --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) --build-arg ARCH=s390x .
 
 ##docker build -t ${IMG} --build-arg BUILDER_IMAGE=$(GO_BUILDER_IMAGE) .
