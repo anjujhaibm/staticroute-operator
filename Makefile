@@ -85,13 +85,13 @@ build-operator: update-operator-resource validate-code
 	make docker-build IMG=$(REGISTRY_REPO)
 
 dev-publish-image: _calculate-build-number build-operator
-	docker tag $(REGISTRY_REPO) $(REGISTRY_REPO):$(CONTAINER_VERSION)
+	docker tag $(REGISTRY_REPO)-${ARCH} $(REGISTRY_REPO):$(CONTAINER_VERSION)
 	docker push $(REGISTRY_REPO):$(CONTAINER_VERSION)
 	@echo "\n image: $(REGISTRY_REPO):$(CONTAINER_VERSION)"
 
 dev-run-operator-local: dev-apply-common-resources
 	# pick the first node to test run
-	$(eval export NODE_HOSTNAME=$(shell sh -c "kubectl get nodes -o jsonpath='{ $$.items[0].status.addresses[?(@.type==\"Hostname\")].address }'")) 
+	$(eval export NODE_HOSTNAME=$(shell sh -c "kubectl get nodes -o jsonpath='{ $$.items[0].status.addresses[?(@.type==\"Hostname\")].address }'"))
 	make run
 
 dev-run-operator-remote: dev-publish-image dev-apply-common-resources
