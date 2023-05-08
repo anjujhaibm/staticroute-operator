@@ -74,8 +74,7 @@ endif
 
 fvt: _calculate-build-number build-operator
 	for arch in ${LINUX_ARCH}; do \
-		echo "$$arch"; \
-		docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO):$(CONTAINER_VERSION); \
+		docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION); \
 	done
 #$(eval export REGISTRY_REPO?=$(REGISTRY_REPO))
 #@scripts/run-fvt.sh
