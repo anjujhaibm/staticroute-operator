@@ -10,6 +10,7 @@ SHELLCHECK_EXISTS:=$(shell shellcheck --version 2>/dev/null)
 YAMLLINT_EXISTS:=$(shell yamllint --version 2>/dev/null)
 INSTALL_LOCATION?=$(GOPATH)/bin
 MAKEFILE_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
+LINUX_ARCH= amd64 s390x
 
 include Makefile.env
 include Makefile.sdk
@@ -72,7 +73,10 @@ else
 endif
 
 fvt: _calculate-build-number build-operator
-	docker tag $(REGISTRY_REPO)-${ARCH} $(REGISTRY_REPO):$(CONTAINER_VERSION)
+	for arch in ${LINUX_ARCH}; do\
+		echo "${arch}"
+		docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO):$(CONTAINER_VERSION)
+	done
 #$(eval export REGISTRY_REPO?=$(REGISTRY_REPO))
 #@scripts/run-fvt.sh
 
