@@ -73,11 +73,17 @@ else
 endif
 
 fvt: _calculate-build-number build-operator
-	for arch in ${LINUX_ARCH}; do \
-		docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION); \
-		$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-$${arch}); \
-		scripts/run-fvt.sh; \
+	for arch in ${LINUX_ARCH} ; do
+	docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION);
+	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-$${arch});
+	@scripts/run-fvt.sh ; \
 	done
+
+# for arch in ${LINUX_ARCH}; do \
+# 	docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION); \
+# 	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-$${arch}) ;\
+# 	@scripts/run-fvt.sh ;\
+# done
 #$(eval export REGISTRY_REPO?=$(REGISTRY_REPO))
 #@scripts/run-fvt.sh
 
