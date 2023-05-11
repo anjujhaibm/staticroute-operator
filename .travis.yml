@@ -45,8 +45,6 @@ script:
 - make deps
 - make fvt || travis_terminate 1
 - docker images
-- docker inspect ${IMG}-amd64
-- docker inspect ${IMG}-s390x
 
 # deploy:
 # - provider: script
