@@ -76,6 +76,7 @@ fvt: _calculate-build-number build-operator
 	docker tag $(REGISTRY_REPO)-amd64 $(REGISTRY_REPO)-amd64:$(CONTAINER_VERSION)
 	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-amd64);
 	@scripts/run-fvt.sh
+	docker images
 	docker tag $(REGISTRY_REPO)-s390x $(REGISTRY_REPO)-s390x:$(CONTAINER_VERSION)
 	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-s390x);
 	@scripts/run-fvt.sh
