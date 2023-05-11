@@ -30,6 +30,8 @@ after_failure:
 
 before_script:
 - export REGISTRY_URL=$(echo "${DOCKER_REGISTRY_LIST}" | tr ',' ' ' | cut -d' ' -f1)
+- echo ${REGISTRY_URL}
+- echo ${DOCKER_IMAGE_NAME}
 - DOCKER_CLI_EXPERIMENTAL=enabled
 - DOCKER_BUILDKIT=1 docker build --help
 - mkdir -p ~/.docker/cli-plugins
