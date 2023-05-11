@@ -73,11 +73,12 @@ else
 endif
 
 fvt: _calculate-build-number build-operator
-	for arch in ${LINUX_ARCH} ; do \
-	docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION); \
-	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-$${arch});
-	@scripts/run-fvt.sh ; \
-	done
+	docker tag $(REGISTRY_REPO)-amd64 $(REGISTRY_REPO)-amd64:$(CONTAINER_VERSION)
+	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-amd64);
+	@scripts/run-fvt.sh
+	docker tag $(REGISTRY_REPO)-s390x $(REGISTRY_REPO)-s390x:$(CONTAINER_VERSION)
+	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-s390x);
+	@scripts/run-fvt.sh
 
 # for arch in ${LINUX_ARCH}; do \
 # 	docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION); \
