@@ -39,7 +39,7 @@ before_script:
 - mv buildx-v0.9.1.linux-amd64 ~/.docker/cli-plugins/docker-buildx
 - docker buildx create --use --name multi-builder --platform linux/amd64,linux/s390x
 - docker buildx version
-- export REGISTRY_REPO=${REGISTRY_URL}/${DOCKER_IMAGE_NAME}
+# - export REGISTRY_REPO=${REGISTRY_URL}/${DOCKER_IMAGE_NAME}
 
 script:
 - make deps
