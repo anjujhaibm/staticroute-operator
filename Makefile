@@ -73,22 +73,10 @@ else
 endif
 
 fvt: _calculate-build-number build-operator
-# docker images
-# docker tag $(REGISTRY_REPO)-amd64 $(REGISTRY_REPO)-amd64:$(CONTAINER_VERSION)
-# $(eval export REGISTRY_REPO=$(REGISTRY_REPO)-amd64)
-# @scripts/run-fvt.sh
 	docker images
-	docker tag $(REGISTRY_REPO)-s390x $(REGISTRY_REPO)-s390x:$(CONTAINER_VERSION)
-	$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-s390x)
+	docker tag $(REGISTRY_REPO)-amd64 $(REGISTRY_REPO)-amd64:$(CONTAINER_VERSION)
+	$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-amd64)
 	@scripts/run-fvt.sh
-
-# for arch in ${LINUX_ARCH}; do \
-# 	docker tag $(REGISTRY_REPO)-$${arch} $(REGISTRY_REPO)-$${arch}:$(CONTAINER_VERSION); \
-# 	$$(eval export REGISTRY_REPO=$(REGISTRY_REPO)-$${arch}) ;\
-# 	@scripts/run-fvt.sh ;\
-# done
-#$(eval export REGISTRY_REPO?=$(REGISTRY_REPO))
-#@scripts/run-fvt.sh
 
 validate-code: lint lint-sh lint-yaml formatcheck vet sec test
 
